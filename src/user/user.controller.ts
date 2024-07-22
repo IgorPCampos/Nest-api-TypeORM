@@ -24,7 +24,7 @@ export class UserController {
 
     @Get(":id")
     async listOne(@ParamId() id: number) {
-        return this.userService.listOne(id);
+        return this.userService.show(id);
     }
 
     @UseInterceptors(LogInterceptor) //Coloca o interceptor somente nessa rota

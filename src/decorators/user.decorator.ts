@@ -1,8 +1,8 @@
 import { createParamDecorator, ExecutionContext, NotFoundException } from "@nestjs/common";
-import { User } from "@prisma/client";
+import { UserEntity } from "src/user/entity/user.entity";
 
 export const UserFilter = createParamDecorator(
-    (filter: keyof Omit<User, "id" | "password">, context: ExecutionContext) => {
+    (filter: keyof Omit<UserEntity, "id" | "password">, context: ExecutionContext) => {
         const request = context.switchToHttp().getRequest();
         if (request.user) {
             return filter ? request.user[filter] : request.user;
