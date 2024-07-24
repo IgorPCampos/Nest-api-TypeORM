@@ -15,13 +15,13 @@ import { AuthLoginDTO } from "./dto/auth-login.dto";
 import { AuthRegisterDTO } from "./dto/auth-register.dto";
 import { AuthForgetDTO } from "./dto/auth-forget.dto";
 import { AuthResetDTO } from "./dto/auth-reset.dto";
-import { UserService } from "src/user/user.service";
 import { AuthService } from "./auth.service";
-import { AuthGuard } from "src/guards/auth.guard";
-import { UserFilter } from "src/decorators/user.decorator";
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import { join } from "path";
-import { FileService } from "src/file/file.service";
+import { UserFilter } from "../decorators/user.decorator";
+import { FileService } from "../file/file.service";
+import { AuthGuard } from "../guards/auth.guard";
+import { UserService } from "../user/user.service";
 
 @Controller("auth")
 export class AuthController {
@@ -36,7 +36,7 @@ export class AuthController {
         return this.authService.login(email, password);
     }
 
-    @Post("regsiter")
+    @Post("register")
     async register(@Body() body: AuthRegisterDTO) {
         return this.authService.register(body);
     }

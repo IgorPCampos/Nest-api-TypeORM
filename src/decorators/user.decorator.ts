@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext, NotFoundException } from "@nestjs/common";
-import { UserEntity } from "src/user/entity/user.entity";
+import { UserEntity } from "../user/entity/user.entity";
 
 export const UserFilter = createParamDecorator(
     (filter: keyof Omit<UserEntity, "id" | "password">, context: ExecutionContext) => {
