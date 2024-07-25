@@ -12,6 +12,7 @@ import { UpdatePatchUserDTOMock } from "../testing/update-patch-user-dto.mock";
 describe("UserService", () => {
     let userService: UserService;
     let userRepository: Repository<UserEntity>;
+
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [UserService, userRepositoryMock]
@@ -26,7 +27,7 @@ describe("UserService", () => {
     });
 
     describe("Create", () => {
-        it("method create", async () => {
+        it("create method", async () => {
             jest.spyOn(userRepository, "exists").mockResolvedValueOnce(false);
             const result = await userService.create(CreateUserDTOMock);
 
@@ -35,13 +36,13 @@ describe("UserService", () => {
     });
 
     describe("Read", () => {
-        it("method list", async () => {
+        it("list method", async () => {
             const result = await userService.list();
 
             expect(result).toEqual(userEntityList);
         });
 
-        it("method show", async () => {
+        it("show method", async () => {
             const result = await userService.show(1);
 
             expect(result).toEqual(userEntityList[0]);
@@ -49,13 +50,13 @@ describe("UserService", () => {
     });
 
     describe("Update", () => {
-        it("method update", async () => {
+        it("update method", async () => {
             const result = await userService.update(1, UpdatePutUserDTOMock);
 
             expect(result).toEqual(userEntityList[0]);
         });
 
-        it("method updatePartial", async () => {
+        it("updatePartial method", async () => {
             const result = await userService.updatePartial(1, UpdatePatchUserDTOMock);
 
             expect(result).toEqual(userEntityList[0]);
@@ -63,7 +64,7 @@ describe("UserService", () => {
     });
 
     describe("Delete", () => {
-        it("method delete", async () => {
+        it("delete method", async () => {
             const result = await userService.delete(1);
 
             expect(result).toEqual(true);
