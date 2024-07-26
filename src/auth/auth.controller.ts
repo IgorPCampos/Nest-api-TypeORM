@@ -21,12 +21,11 @@ import { join } from "path";
 import { UserFilter } from "../decorators/user.decorator";
 import { FileService } from "../file/file.service";
 import { AuthGuard } from "../guards/auth.guard";
-import { UserService } from "../user/user.service";
+import { UserEntity } from "../user/entity/user.entity";
 
 @Controller("auth")
 export class AuthController {
     constructor(
-        private readonly userService: UserService,
         private readonly authService: AuthService,
         private readonly fileService: FileService
     ) {}
@@ -53,15 +52,15 @@ export class AuthController {
 
     @UseGuards(AuthGuard)
     @Post("me")
-    async me(@UserFilter("email") user) {
-        return { user };
+    async me(@UserFilter("email") user: UserEntity) {
+        return user;
     }
 
     @UseInterceptors(FileInterceptor("file"))
     @UseGuards(AuthGuard)
     @Post("file")
     async uploadFile(
-        @UserFilter() user,
+        @UserFilter() user: UserEntity,
         @UploadedFile(
             new ParseFilePipe({
                 validators: [
@@ -83,7 +82,7 @@ export class AuthController {
             throw new BadRequestException(error);
         }
 
-        return { sucess: true };
+        return photo;
     }
 
     @UseInterceptors(FilesInterceptor("files"))

@@ -23,7 +23,7 @@ export class UserController {
     }
 
     @Get(":id")
-    async listOne(@ParamId() id: number) {
+    async show(@ParamId() id: number) {
         return this.userService.show(id);
     }
 
