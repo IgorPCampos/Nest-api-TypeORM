@@ -52,7 +52,8 @@ export class AuthController {
 
     @UseGuards(AuthGuard)
     @Post("me")
-    async me(@UserFilter("email") user: UserEntity) {
+    async me(@UserFilter() user: UserEntity) {
+        //@UserFilter("email") para pegar só o email
         return user;
     }
 

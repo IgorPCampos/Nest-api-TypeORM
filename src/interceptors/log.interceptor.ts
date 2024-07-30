@@ -3,10 +3,10 @@ import { Observable, tap } from "rxjs";
 
 export class LogInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
-        const dt = Date.now();
+        //const dt = Date.now();
         return next.handle().pipe(
             tap(() => {
-                const request = context.switchToHttp().getRequest();
+                //const request = context.switchToHttp().getRequest();
                 // console.log(`URL:  ${request.method + request.url}`);
                 // console.log(`Execução levou ${Date.now() - dt} milisegundos`);
             })
